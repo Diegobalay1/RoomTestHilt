@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Room Test</string>
+    <string name="product_id">Product ID</string>
+    <string name="not_assigned">Not assigned</string>
+    <string name="product_name">Product Name</string>
+    <string name="productname">productName</string>
+    <string name="product_quantity">Product Quantity</string>
+    <string name="productquantity">productQuantity</string>
+    <string name="add">Add</string>
+    <string name="find">Find</string>
+    <string name="delete">Delete</string>
 </resources>
