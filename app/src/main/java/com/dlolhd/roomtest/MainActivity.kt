@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.insertProduct(product)
                 clearFields()
             } else {
-                binding.tvNotAssignedId.text = getString(R.string.incomplete_information)
+                binding.productId.text = getString(R.string.incomplete_information)
             }
         }
 
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.getSearchResults().observe(this) { products ->
             products?.let {
                 if (it.isNotEmpty()) {
-                    binding.tvNotAssignedId.text = String.format(Locale.US, "%d", it[0].id)
+                    binding.productId.text = String.format(Locale.US, "%d", it[0].id)
                     binding.productName.setText(it[0].productName)
                     binding.productQuantity.setText(
                         String.format(
@@ -72,18 +72,20 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                 } else {
-                    binding.tvNotAssignedId.text = getString(R.string.no_match)
+                    binding.productId.text = getString(R.string.no_match)
                 }
             }
         }
     }
 
     private fun recyclerSetup() {
-
+        adapter = ProductListAdapter(R.layout.product_list_item)
+        binding.productRecycler.layoutManager = LinearLayoutManager(this)
+        binding.productRecycler.adapter = adapter
     }
 
     private fun clearFields() {
-        binding.tvNotAssignedId.text = ""
+        binding.productId.text = ""
         binding.productName.setText("")
         binding.productQuantity.setText("")
     }

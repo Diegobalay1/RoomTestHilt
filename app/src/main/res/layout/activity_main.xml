@@ -24,7 +24,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tv_not_assigned_id"
+                android:id="@+id/product_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/not_assigned"
