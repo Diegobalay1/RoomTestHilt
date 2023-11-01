@@ -10,4 +10,5 @@
     <string name="find">Find</string>
     <string name="delete">Delete</string>
     <string name="incomplete_information">Incomplete information</string>
+    <string name="no_match">No Match</string>
 </resources>
