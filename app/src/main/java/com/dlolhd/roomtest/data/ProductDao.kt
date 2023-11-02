@@ -1,9 +1,10 @@
-package com.dlolhd.roomtest
+package com.dlolhd.roomtest.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.dlolhd.roomtest.data.Product
 
 @Dao
 interface ProductDao {

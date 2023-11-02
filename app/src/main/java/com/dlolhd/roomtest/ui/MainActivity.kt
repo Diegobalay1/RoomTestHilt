@@ -1,10 +1,13 @@
-package com.dlolhd.roomtest
+package com.dlolhd.roomtest.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.dlolhd.roomtest.databinding.ActivityMainBinding
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dlolhd.roomtest.data.Product
+import com.dlolhd.roomtest.data.ProductListAdapter
+import com.dlolhd.roomtest.R
 
 import java.util.*
 

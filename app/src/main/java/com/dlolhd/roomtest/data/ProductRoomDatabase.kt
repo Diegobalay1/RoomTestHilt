@@ -1,4 +1,4 @@
-package com.dlolhd.roomtest
+package com.dlolhd.roomtest.data
 
 import android.content.Context
 import androidx.room.Database

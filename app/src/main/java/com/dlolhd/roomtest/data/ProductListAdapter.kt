@@ -1,12 +1,10 @@
-package com.dlolhd.roomtest
+package com.dlolhd.roomtest.data
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.dlolhd.roomtest.Product
 import com.dlolhd.roomtest.R
 
 class ProductListAdapter(

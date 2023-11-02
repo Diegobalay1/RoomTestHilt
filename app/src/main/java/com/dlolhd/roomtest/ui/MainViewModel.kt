@@ -1,9 +1,11 @@
-package com.dlolhd.roomtest
+package com.dlolhd.roomtest.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dlolhd.roomtest.data.Product
+import com.dlolhd.roomtest.data.ProductRepository
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: ProductRepository = ProductRepository(application)
