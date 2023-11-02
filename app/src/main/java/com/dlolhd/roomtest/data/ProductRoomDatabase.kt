@@ -10,7 +10,7 @@ abstract class ProductRoomDatabase : RoomDatabase() {
 
     abstract fun productDao() : ProductDao
 
-    companion object {
+    /*companion object {
         private var INSTANCE: ProductRoomDatabase? = null
 
         internal fun getDatabase(context: Context): ProductRoomDatabase? {
@@ -28,6 +28,6 @@ abstract class ProductRoomDatabase : RoomDatabase() {
             }
             return INSTANCE
         }
-    }
+    }*/
 
 }

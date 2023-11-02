@@ -1,25 +1,35 @@
 package com.dlolhd.roomtest.data
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 
-class ProductRepository(application: Application) {
-
-    val searchResults = MutableLiveData<List<Product>>()
-    private var productDao: ProductDao?
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+interface ProductRepository {
+    val searchResults: MutableLiveData<List<Product>>
     val allProducts: LiveData<List<Product>>?
+    fun insertProduct(newProduct: Product)
+    fun deleteProduct(name: String)
+    fun findProduct(name: String)
+}
+
+//class ProductLocalRepository(application: Context) : ProductRepository {
+class ProductLocalRepository(private val productDao: ProductDao?) : ProductRepository {
+
+    override val searchResults = MutableLiveData<List<Product>>()
+    //private var productDao: ProductDao?
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    override val allProducts: LiveData<List<Product>>?
 
     init {
-        val db: ProductRoomDatabase? =
-            ProductRoomDatabase.getDatabase(application)
-        productDao = db?.productDao()
+        /*val db: ProductRoomDatabase? =
+            ProductRoomDatabase.getDatabase(application)*/
+        //productDao = db?.productDao()
         allProducts = productDao?.getAllProducts()
     }
 
-    fun insertProduct(newProduct: Product) {
+    override fun insertProduct(newProduct: Product) {
         coroutineScope.launch(Dispatchers.IO) {
             asyncInsert(newProduct)
         }
@@ -29,7 +39,7 @@ class ProductRepository(application: Application) {
         productDao?.insertProduct(product)
     }
 
-    fun deleteProduct(name: String) {
+    override fun deleteProduct(name: String) {
         coroutineScope.launch(Dispatchers.IO) {
             asyncDelete(name)
         }
@@ -39,7 +49,7 @@ class ProductRepository(application: Application) {
         productDao?.deleteProduct(name)
     }
 
-    fun findProduct(name: String) {
+    override fun findProduct(name: String) {
         coroutineScope.launch(Dispatchers.Main) {
             searchResults.value = asyncFind(name).await()
         }

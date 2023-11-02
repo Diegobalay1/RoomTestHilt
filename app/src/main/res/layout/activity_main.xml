@@ -50,7 +50,8 @@
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="text"
-                android:text="@string/productname"
+                tools:text="@string/productname"
+                android:hint="@string/product_name"
                 android:textSize="18sp" />
         </TableRow>
 
@@ -73,7 +74,8 @@
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="numberDecimal"
-                android:text="@string/productquantity"
+                tools:text="@string/productquantity"
+                android:hint="@string/product_quantity"
                 android:textSize="18sp" />
         </TableRow>
     </TableLayout>

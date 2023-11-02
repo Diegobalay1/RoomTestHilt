@@ -4,11 +4,22 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.CreationExtras
+import com.dlolhd.roomtest.ProductApplication
 import com.dlolhd.roomtest.data.Product
+import com.dlolhd.roomtest.data.ProductLocalRepository
 import com.dlolhd.roomtest.data.ProductRepository
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: ProductRepository = ProductRepository(application)
+//class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(
+    private val repository: ProductRepository
+) : ViewModel() {
+    //private val repository: ProductLocalRepository = ProductLocalRepository(application)
+    //private val container = (application as ProductApplication).appContainer
+    //private val repository: ProductRepository = container.repository
     private val allProducts: LiveData<List<Product>>?
     private val searchResults: MutableLiveData<List<Product>>
 
@@ -35,6 +46,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getAllProducts(): LiveData<List<Product>>? {
         return allProducts
+    }
+
+    companion object {
+        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
+                return MainViewModel(
+                    (extras[APPLICATION_KEY] as ProductApplication)
+                        .appContainer.repository
+                ) as T
+            }
+        }
     }
 
 }
