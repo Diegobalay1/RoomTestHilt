@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.dlolhd.roomtest.ProductApplication
 import com.dlolhd.roomtest.data.Product
 import com.dlolhd.roomtest.data.ProductLocalRepository
@@ -49,13 +51,20 @@ class MainViewModel(
     }
 
     companion object {
-        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+        /*val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 return MainViewModel(
                     (extras[APPLICATION_KEY] as ProductApplication)
                         .appContainer.repository
                 ) as T
+            }
+        }*/
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val productRepository = (this[APPLICATION_KEY] as ProductApplication)
+                    .appContainer.repository
+                MainViewModel(repository = productRepository)
             }
         }
     }
