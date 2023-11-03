@@ -1,7 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    //id("kotlin-kapt")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
     //id("com.google.devtools.ksp")
 }
 
@@ -42,6 +44,7 @@ android {
 
 }
 
+val hiltVersion = "2.45"
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -59,13 +62,29 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
+    // Hilt
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+
     //testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // Local tests.
     testImplementation("junit:junit:4.13.2")
+    testImplementation("androidx.test:core:1.5.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+
+    // Hilt testing dependency
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
+    // Make Hilt generate code in the androidTest folder
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
+}
+
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
 
 
