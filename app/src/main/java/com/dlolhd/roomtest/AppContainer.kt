@@ -3,13 +3,11 @@ package com.dlolhd.roomtest
 import android.content.Context
 import androidx.room.Room
 import com.dlolhd.roomtest.data.LocalDataSource
-import com.dlolhd.roomtest.data.ProductLocalRepository
-import com.dlolhd.roomtest.data.ProductRepository
 import com.dlolhd.roomtest.data.ProductRoomDatabase
 import com.dlolhd.roomtest.data.RemoteDataSource
 
 interface AppContainer {
-    val repository: ProductRepository
+    //val repository: ProductRepository
 }
 
 class DefaultAppContainer(application: Context): AppContainer {
@@ -26,9 +24,9 @@ class DefaultAppContainer(application: Context): AppContainer {
     private val remoteDataSource = RemoteDataSource()
 
     // repository is not private; it'll be exposed
-    override val repository: ProductRepository by lazy {
+    /*override val repository: ProductRepository by lazy {
         //ProductLocalRepository(application)
         ProductLocalRepository(dao)
-    }
+    }*/
 
 }

@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dlolhd.roomtest.R
+import javax.inject.Inject
 
-class ProductListAdapter(
-    private val productItemLayout: Int
+class ProductListAdapter @Inject constructor(
+    //private val productItemLayout: Int
 ) : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
 
     private var productList: List<Product>? = null
@@ -23,7 +24,8 @@ class ProductListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            productItemLayout, parent, false
+            //productItemLayout, parent, false
+            R.layout.product_list_item, parent, false
         )
         return ProductViewHolder(view)
     }

@@ -2,6 +2,7 @@ package com.dlolhd.roomtest.data
 
 import android.content.Context
 import androidx.room.Database
+import androidx.room.Ignore
 import androidx.room.Room
 import androidx.room.RoomDatabase
 

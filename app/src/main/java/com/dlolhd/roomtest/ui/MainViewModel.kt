@@ -1,22 +1,16 @@
 package com.dlolhd.roomtest.ui
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
-import androidx.lifecycle.viewmodel.CreationExtras
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.dlolhd.roomtest.ProductApplication
 import com.dlolhd.roomtest.data.Product
-import com.dlolhd.roomtest.data.ProductLocalRepository
 import com.dlolhd.roomtest.data.ProductRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 //class MainViewModel(application: Application) : AndroidViewModel(application) {
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val repository: ProductRepository
 ) : ViewModel() {
     //private val repository: ProductLocalRepository = ProductLocalRepository(application)
@@ -50,7 +44,7 @@ class MainViewModel(
         return allProducts
     }
 
-    companion object {
+    /*companion object {
         /*val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
@@ -67,6 +61,6 @@ class MainViewModel(
                 MainViewModel(repository = productRepository)
             }
         }
-    }
+    }*/
 
 }

@@ -5,27 +5,41 @@ import android.os.Bundle
 import com.dlolhd.roomtest.databinding.ActivityMainBinding
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.dlolhd.roomtest.data.Product
 import com.dlolhd.roomtest.data.ProductListAdapter
 import com.dlolhd.roomtest.R
+import dagger.hilt.android.AndroidEntryPoint
 
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var adapter: ProductListAdapter? = null
+    //private var adapter: ProductListAdapter? = null
+    //@Inject var adapter: ProductListAdapter? = null
     //private val viewModel: MainViewModel by viewModels()
-    private val viewModel: MainViewModel by viewModels { MainViewModel.Factory }
+    //private val viewModel: MainViewModel by viewModels { MainViewModel.Factory }
+    private lateinit var viewModel: MainViewModel
+    @Inject lateinit var lm: LayoutManager
+    @Inject lateinit var adapter: ProductListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModelSetup()
         listenerSetup()
         observerSetup()
         recyclerSetup()
+    }
+
+    private fun viewModelSetup() {
+        val vm : MainViewModel by viewModels()
+        viewModel = vm
     }
 
     private fun listenerSetup() {
@@ -83,9 +97,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun recyclerSetup() {
-        adapter = ProductListAdapter(R.layout.product_list_item)
+        binding.productRecycler.apply {
+            //this@MainActivity.adapter = ProductListAdapter(R.layout.product_list_item)
+            setHasFixedSize(true)
+            layoutManager = lm
+            adapter = this@MainActivity.adapter
+            //adapter = this@MainActivity.adapter
+        }
+        /*adapter = ProductListAdapter(R.layout.product_list_item)
         binding.productRecycler.layoutManager = LinearLayoutManager(this)
-        binding.productRecycler.adapter = adapter
+        binding.productRecycler.adapter = adapter*/
     }
 
     private fun clearFields() {

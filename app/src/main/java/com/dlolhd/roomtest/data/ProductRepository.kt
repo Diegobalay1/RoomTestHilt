@@ -1,10 +1,10 @@
 package com.dlolhd.roomtest.data
 
-import android.app.Application
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
 interface ProductRepository {
     val searchResults: MutableLiveData<List<Product>>
@@ -14,8 +14,12 @@ interface ProductRepository {
     fun findProduct(name: String)
 }
 
+
 //class ProductLocalRepository(application: Context) : ProductRepository {
-class ProductLocalRepository(private val productDao: ProductDao?) : ProductRepository {
+@Singleton
+class ProductLocalRepositoryImpl @Inject constructor(
+    private val productDao: ProductDao?
+) : ProductRepository {
 
     override val searchResults = MutableLiveData<List<Product>>()
     //private var productDao: ProductDao?
